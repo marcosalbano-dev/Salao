@@ -2,6 +2,8 @@ package frame;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -92,10 +94,15 @@ public class Login extends JFrame {
 		
 		//Botao Sair
 		JButton btnSair_1 = new JButton("Sair");
-		btnSair_1.addActionListener(new ActionListener() {
+		btnSair_1.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				dispose();
+				if(JOptionPane.showConfirmDialog(null, "Você deseja realmente sair do Programa?")== 0){
+					setVisible(false);
+					dispose();
+				} else{
+					return;
+				}
+				
 			}
 		});
 		btnSair_1.setBounds(10, 11, 144, 23);

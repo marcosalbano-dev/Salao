@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class CadastroCliente extends JFrame {
 	
+	//Componentes do frame
 	private JTextField txtNomeCliente;
 	private JTextField txtEndereco;
 	private JFormattedTextField txtTelefone;
