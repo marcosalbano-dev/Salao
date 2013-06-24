@@ -1,6 +1,9 @@
 package frame;
 
+import source.Cliente;
+
 import java.text.ParseException;
+
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +15,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -23,10 +27,12 @@ public class CadastroCliente extends JFrame {
 	private JFormattedTextField txtTelefone;
 	private JFormattedTextField txtCelular;
 	private final ButtonGroup groupSexo = new ButtonGroup();
+	private JRadioButton rdbtnMasculino;
+	private JRadioButton rdbtnFeminino;
 
 	public CadastroCliente(){
 		//Define tamanho e posição da tela
-		setBounds(100, 100, 440, 240);
+		setBounds(100, 100, 480, 240);
 		setLocationRelativeTo(null);
 		
 		setTitle("Cadastro de Cliente");
@@ -93,31 +99,66 @@ public class CadastroCliente extends JFrame {
 		//Panel com opções de sexo
 		JPanel panelSexo = new JPanel();
 		panelSexo.setBorder(new TitledBorder(null, "Sexo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelSexo.setBounds(10, 111, 87, 101);
+		panelSexo.setBounds(10, 111, 107, 79);
 		getContentPane().add(panelSexo);
 		panelSexo.setLayout(null);
 		
 		//RadioButton Masculino
-		JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
+		final JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
 		groupSexo.add(rdbtnMasculino);
-		rdbtnMasculino.setBounds(6, 27, 75, 23);
+		rdbtnMasculino.setBounds(6, 27, 95, 23);
 		panelSexo.add(rdbtnMasculino);
 		
 		//RadioButton Feminino
-		JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
+		final JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
 		groupSexo.add(rdbtnFeminino);
-		rdbtnFeminino.setBounds(6, 53, 75, 23);
+		rdbtnFeminino.setBounds(6, 53, 95, 23);
 		panelSexo.add(rdbtnFeminino);
 		
 		//Panel de opções
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(120, 135, 304, 52);
+		panel.setBounds(127, 138, 327, 52);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		//Botão cadastrar
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(JOptionPane.showConfirmDialog(null, "Deseja realmente cadastrar o novo Cliente?") == 0){
+				
+					if(checkField() == true){
+					
+						Cliente novoCliente = new Cliente();
+				
+						String novoNomeCliente = txtNomeCliente.getText();
+						String novoEndereco = txtEndereco.getText();
+						String novoSexo;
+						String novoTelefone = txtTelefone.getText();
+						novoTelefone = novoTelefone.replace("-", "");
+						String novoCelular = txtCelular.getText();
+						novoCelular = novoCelular.replace("-", "");
+						
+						if(rdbtnMasculino.isSelected()){
+							novoSexo = "Masculino";
+						} else{
+							novoSexo = "Feminino";
+						}
+						
+						novoCliente = novoCliente.cadastraCliente(novoNomeCliente, novoEndereco, novoSexo, novoTelefone, novoCelular);
+						JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+					} else{
+						return;
+					}
+					
+				} else{
+					return;
+				}
+				
+			}		
+		});
 		btnCadastrar.setBounds(10, 11, 88, 23);
 		panel.add(btnCadastrar);
 		
@@ -125,7 +166,10 @@ public class CadastroCliente extends JFrame {
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				txtNomeCliente.setText(null);
+				txtEndereco.setText(null);
+				txtTelefone.setText(null);
+				txtCelular.setText(null);
 			}
 		});
 		btnLimpar.setBounds(108, 11, 88, 23);
@@ -143,4 +187,40 @@ public class CadastroCliente extends JFrame {
 		panel.add(btnVoltar);
 		
 	}
+	
+	public boolean checkField(){
+		String novoTelefone = txtTelefone.getText();
+		novoTelefone = novoTelefone.replace("-", "");
+		String novoCelular = txtCelular.getText();
+		novoCelular = novoCelular.replace("-", "");
+		
+		
+		if (txtNomeCliente.getText().equals("")){
+			JOptionPane.showMessageDialog(null, "Por favor digite o nome do Cliente"); 
+			return false;
+		}
+		if (txtEndereco.getText().equals("")){
+			JOptionPane.showMessageDialog(null, "Por favor digite o endereço do Cliente");
+			return false;
+		}
+		
+		if (novoTelefone == ""){
+			JOptionPane.showMessageDialog(null, "Por favor digite o telefone do Cliente");
+			return false;
+		}
+		if	(novoCelular == ""){
+			JOptionPane.showMessageDialog(null, "Por favor digite o Celular do Cliente");
+			return false;
+		}
+		
+		if ((rdbtnMasculino.isSelected() == false) && (rdbtnFeminino.isSelected() == false)){
+			JOptionPane.showMessageDialog(null, "Por favor selecione o sexo do Cliente");
+			return false;
+		}
+		
+		return true;
+	}
+		
+	
+	
 }

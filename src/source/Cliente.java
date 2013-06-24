@@ -17,15 +17,15 @@ public class Cliente {
 		i_telefoneCelular = 0;
 	}
 
-	public Cliente cadastraCliente(String s_nomeCliente, String s_endereco, String s_sexo, int i_telefoneFixo, int i_telefoneCelular){
+	public Cliente cadastraCliente(String s_nomeCliente, String s_endereco, String s_sexo, String s_telefoneFixo, String s_telefoneCelular){
 		
 		Cliente novoCliente = new Cliente();
 		
 		novoCliente.setS_nomeCliente(s_nomeCliente);
 		novoCliente.setS_endereco(s_endereco);
 		novoCliente.setS_sexo(s_sexo);
-		novoCliente.setI_telefoneFixo(i_telefoneFixo);
-		novoCliente.setI_telefoneCelular(i_telefoneCelular);
+		novoCliente.setI_telefoneFixo(Integer.parseInt(s_telefoneFixo));
+		novoCliente.setI_telefoneCelular(Integer.parseInt(s_telefoneCelular));
 		
 		return novoCliente;
 	}
