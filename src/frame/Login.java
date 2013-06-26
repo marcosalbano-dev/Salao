@@ -96,8 +96,8 @@ public class Login extends JFrame {
 		JButton btnSair_1 = new JButton("Sair");
 		btnSair_1.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent arg0) {
-				if(JOptionPane.showConfirmDialog(null, "Você deseja realmente sair do Programa?")== 0){
-					setVisible(false);
+				if(JOptionPane.showConfirmDialog(null, "Você deseja realmente sair do Programa?", "Sair do Programa", JOptionPane.YES_NO_OPTION) == 0){
+					setVisible(false);	
 					dispose();
 				} else{
 					return;

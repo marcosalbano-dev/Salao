@@ -108,6 +108,7 @@ public class CadastroCliente extends JFrame {
 		groupSexo.add(rdbtnMasculino);
 		rdbtnMasculino.setBounds(6, 27, 95, 23);
 		panelSexo.add(rdbtnMasculino);
+		rdbtnMasculino.setSelected(true);
 		
 		//RadioButton Feminino
 		final JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
@@ -127,15 +128,15 @@ public class CadastroCliente extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(JOptionPane.showConfirmDialog(null, "Deseja realmente cadastrar o novo Cliente?") == 0){
+				if(checkField() == true){
 				
-					if(checkField() == true){
+					if(JOptionPane.showConfirmDialog(null, "Deseja realmente cadastrar o novo Cliente?", "Cadastro de Cliente",  JOptionPane.YES_NO_OPTION) == 0){
 					
 						Cliente novoCliente = new Cliente();
 				
 						String novoNomeCliente = txtNomeCliente.getText();
 						String novoEndereco = txtEndereco.getText();
-						String novoSexo;
+						String novoSexo = "";
 						String novoTelefone = txtTelefone.getText();
 						novoTelefone = novoTelefone.replace("-", "");
 						String novoCelular = txtCelular.getText();
@@ -143,7 +144,7 @@ public class CadastroCliente extends JFrame {
 						
 						if(rdbtnMasculino.isSelected()){
 							novoSexo = "Masculino";
-						} else{
+						} else if(rdbtnFeminino.isSelected()){
 							novoSexo = "Feminino";
 						}
 						
@@ -189,38 +190,37 @@ public class CadastroCliente extends JFrame {
 	}
 	
 	public boolean checkField(){
-		String novoTelefone = txtTelefone.getText();
-		novoTelefone = novoTelefone.replace("-", "");
-		String novoCelular = txtCelular.getText();
-		novoCelular = novoCelular.replace("-", "");
-		
-		
-		if (txtNomeCliente.getText().equals("")){
-			JOptionPane.showMessageDialog(null, "Por favor digite o nome do Cliente"); 
-			return false;
-		}
-		if (txtEndereco.getText().equals("")){
-			JOptionPane.showMessageDialog(null, "Por favor digite o endereço do Cliente");
-			return false;
-		}
-		
-		if (novoTelefone == ""){
-			JOptionPane.showMessageDialog(null, "Por favor digite o telefone do Cliente");
-			return false;
-		}
-		if	(novoCelular == ""){
-			JOptionPane.showMessageDialog(null, "Por favor digite o Celular do Cliente");
-			return false;
-		}
-		
-		if ((rdbtnMasculino.isSelected() == false) && (rdbtnFeminino.isSelected() == false)){
-			JOptionPane.showMessageDialog(null, "Por favor selecione o sexo do Cliente");
-			return false;
+		try{
+			String novoTelefone = txtTelefone.getText();
+			novoTelefone = novoTelefone.replace("-", "");
+			novoTelefone = novoTelefone.replaceAll(" ", "");
+
+			String novoCelular = txtCelular.getText();
+			novoCelular = novoCelular.replace("-", "");
+			novoCelular = novoCelular.replaceAll(" ", "");
+			
+			if (txtNomeCliente.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "Digite o nome do Cliente"); 
+				return false;
+			} 
+			else if (txtEndereco.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "Digite o endereço do Cliente");
+				return false;
+			}
+			else if (novoTelefone.equals("")){
+				JOptionPane.showMessageDialog(null, "Digite o telefone do Cliente");
+				return false;
+			}
+			else if	(novoCelular.equals("")){
+				JOptionPane.showMessageDialog(null, "Digite o Celular do Cliente");
+				return false;
+			}
+			
+
+		} catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Erro:"+e.getMessage()) ;
 		}
 		
 		return true;
 	}
-		
-	
-	
 }
