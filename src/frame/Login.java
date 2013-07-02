@@ -2,27 +2,27 @@ package frame;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 public class Login extends JFrame {
 	
 	//Componentes do frame
-	JLabel lblTitle;
-	JPanel panelOpcoes;
-	JButton btnAtendimento;
-	JButton btnAgenda;
-	JButton btnConsulta;
-	JButton btnSair;
+	private JLabel lblTitle;
+	private JPanel panelOpcoes;
+	private JButton btnAtendimento;
+	private JButton btnAgenda;
+	private JButton btnConsulta;
+	private JButton btnSair;
 	
 	public Login() {
 		
@@ -71,6 +71,12 @@ public class Login extends JFrame {
 		
 		//Botão Cadastrar Serviço
 		JButton btnCadastrarServio = new JButton("Cadastrar Servi\u00E7o");
+		btnCadastrarServio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastroServico novaTelaCadastroServico = new CadastroServico();
+				novaTelaCadastroServico.setVisible(true);
+			}
+		});
 		btnCadastrarServio.setBounds(10, 61, 144, 23);
 		panelCadastro.add(btnCadastrarServio);
 		

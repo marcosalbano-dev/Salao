@@ -8,13 +8,12 @@ package source;
  */
 
 import java.sql.*;
-import java.util.*;
 
 import javax.swing.JOptionPane;
 
 public class ConnectionFactory{
-	final private String url = "jdbc:postgresql://localhost:5432/salao";
-	final private String usuario = "postgres";
+	final private String url = "jdbc:postgresql://localhost:5432/postgres";
+	final private String usuario = "salao_adm";
 	final private String senha = "ua79oapq";
 	
 	public Connection conexao;
@@ -43,25 +42,45 @@ public class ConnectionFactory{
 		this.conexao.close();
 	}
 	
-	//Adiciona dados ao Banco de Dados
-	public void insertDada() throws SQLException{
+	//Adiciona Clientes na tabela tab_clientes
+	public void insereCliente(Cliente novoCliente) throws SQLException{
+		
 		this.getConnection();
+		
 		try{
-			PreparedStatement adicionarVeiculo = this.conexao.prepareStatement("INSERT INTO PATIO VALUES(?,?,?)");
-			adicionarVeiculo.setString(1,v.getModelo());
-			adicionarVeiculo.setInt(2, v.getAno());
-			adicionarVeiculo.setDouble(3, v.getPreco());
-			adicionarVeiculo.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Veículo registrado com sucesso");
-		}
+			PreparedStatement adicionarCliente = this.conexao.prepareStatement("INSERT INTO tab_clientes VALUES(?,?,?,?,?)");
+			adicionarCliente.setString(1,novoCliente.getS_nomeCliente());
+			adicionarCliente.setString(2, novoCliente.getS_endereco());
+			adicionarCliente.setString(3, novoCliente.getS_sexo());
+			adicionarCliente.setInt(4, novoCliente.getI_telefoneFixo());
+			adicionarCliente.setInt(5, novoCliente.getI_telefoneCelular());
+			
+			adicionarCliente.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Cliente registrado com sucesso!");
+		} 
 		catch(SQLException e){
-			JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o veiculo. Erro:"+e.getMessage());
+			JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o Cliente. Erro:"+e.getMessage());
 		}
 		this.closeConnection();
 	}
 	
-	//Pesquisa no Banco de Dados e retorna um dado
-	
-	
+	public void insereServico(Servico novoServico){
+		
+		this.getConnection();
+		
+		try{
+			PreparedStatement adicionarServico = this.conexao.prepareStatement("INSERT INTO tab_servicos VALUES(?,?)");
+			adicionarServico.setString(1, novoServico.getS_nomeServico());
+			adicionarServico.setDouble(2, novoServico.getD_preco());
+			
+			adicionarServico.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Serviço registrado com sucesso!");
+		} 
+		catch(SQLException e){
+			JOptionPane.showMessageDialog(null,"Não foi possível cadastrar o Serviço. Erro:"+e.getMessage());
+		}		
+	}
 }
 

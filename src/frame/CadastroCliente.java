@@ -1,7 +1,9 @@
 package frame;
 
 import source.Cliente;
+import source.ConnectionFactory;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.JOptionPane;
@@ -149,7 +151,15 @@ public class CadastroCliente extends JFrame {
 						}
 						
 						novoCliente = novoCliente.cadastraCliente(novoNomeCliente, novoEndereco, novoSexo, novoTelefone, novoCelular);
-						JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+						
+						ConnectionFactory adicionaCliente = new ConnectionFactory();
+						try {
+							adicionaCliente.insereCliente(novoCliente);
+						} catch (SQLException e) {
+							JOptionPane.showMessageDialog(null, "Erro:"+e.getMessage());
+						}
+						
+					
 					} else{
 						return;
 					}
@@ -201,18 +211,22 @@ public class CadastroCliente extends JFrame {
 			
 			if (txtNomeCliente.getText().equals("")){
 				JOptionPane.showMessageDialog(null, "Digite o nome do Cliente"); 
+				txtNomeCliente.requestFocus();
 				return false;
 			} 
 			else if (txtEndereco.getText().equals("")){
 				JOptionPane.showMessageDialog(null, "Digite o endereço do Cliente");
+				txtEndereco.requestFocus();
 				return false;
 			}
 			else if (novoTelefone.equals("")){
 				JOptionPane.showMessageDialog(null, "Digite o telefone do Cliente");
+				txtTelefone.requestFocus();
 				return false;
 			}
 			else if	(novoCelular.equals("")){
 				JOptionPane.showMessageDialog(null, "Digite o Celular do Cliente");
+				txtCelular.requestFocus();
 				return false;
 			}
 			

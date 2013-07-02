@@ -7,12 +7,10 @@ public class Servico {
 	double d_preco;
 
 	public Servico(){
-	s_nomeServico = "";
-	d_preco = 0;
-	
+		s_nomeServico = "";
+		d_preco = 0;
 	}
-
-	//Get's and Set's
+	
 	public Servico cadastraServico(String s_nomeServico, double d_preco){
 		Servico novoServico = new Servico();
 		
@@ -21,7 +19,8 @@ public class Servico {
 		
 		return novoServico;
 	}
-
+	
+	//Get's and Set's
 	public String getS_nomeServico() {
 		return s_nomeServico;
 	}
