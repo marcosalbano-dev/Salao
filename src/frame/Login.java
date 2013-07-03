@@ -59,6 +59,12 @@ public class Login extends JFrame {
 		
 		//Botao Consulta
 		JButton btnConsulta = new JButton("Consulta");
+		btnConsulta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Consulta novaTelaConsulta = new Consulta();
+				novaTelaConsulta.setVisible(true);
+			}
+		});
 		btnConsulta.setBounds(10, 90, 144, 23);
 		panelGerenciamento.add(btnConsulta);
 		
