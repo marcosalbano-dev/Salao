@@ -48,18 +48,8 @@ public class Agenda extends JFrame{
 		//Panel de Opções
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(109, 290, 304, 40);
+		panel.setBounds(157, 290, 217, 40);
 		getContentPane().add(panel);
-		
-		//Botão agendar Clientes
-		JButton btnAgendarCliente = new JButton("Agendar Cliente");
-		btnAgendarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AgendamentoCliente novaTelaAgendamentoCliente = new AgendamentoCliente();
-				novaTelaAgendamentoCliente.setVisible(true);
-			}
-		});
-		panel.add(btnAgendarCliente);
 		
 		//Botão Voltar
 		JButton btnVoltar = new JButton("Voltar");

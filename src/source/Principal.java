@@ -11,8 +11,8 @@ public class Principal {
 	 */
 	public static void main(String[] args) {
 		
-		Login novaTelaLogin = new Login();
-		novaTelaLogin.setVisible(true);
+		Inicio novaTelaInicio = new Inicio();
+		novaTelaInicio.setVisible(true);
 		
 	}
 
