@@ -22,6 +22,7 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Atendimento extends JFrame {
 	
@@ -31,6 +32,7 @@ public class Atendimento extends JFrame {
 	private JComboBox<String> cboxClientes;
 	
 	public Atendimento(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		//Declarações gerais

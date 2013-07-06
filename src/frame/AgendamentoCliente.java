@@ -19,6 +19,7 @@ import java.util.List;
 import source.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class AgendamentoCliente extends JFrame{
 	
@@ -29,6 +30,7 @@ public class AgendamentoCliente extends JFrame{
 	private JComboBox<String> cboxServico;
 	
 	public AgendamentoCliente() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		//Criando Conexão com BD
 		final ConnectionFactory conexaoBanco = new ConnectionFactory();

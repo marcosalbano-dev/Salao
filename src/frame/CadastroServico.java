@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 import source.ConnectionFactory;
 import source.Servico;
+import java.awt.Toolkit;
 
 public class CadastroServico extends JFrame{
 	
@@ -29,6 +30,7 @@ public class CadastroServico extends JFrame{
 	private JPanel panelOpcoes;
 	
 	public CadastroServico(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		setTitle("Cadastro de Serviço");
 		getContentPane().setLayout(null);

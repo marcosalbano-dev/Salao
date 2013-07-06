@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import source.*;
+import java.awt.Toolkit;
 
 
 public class Agenda extends JFrame{
@@ -25,6 +26,7 @@ public class Agenda extends JFrame{
 	private JTable tablePrincipal;
 	
 	public Agenda() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		//Configurações gerais do Frame
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

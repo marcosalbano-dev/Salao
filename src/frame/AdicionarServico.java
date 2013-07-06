@@ -20,6 +20,7 @@ import java.util.List;
 import source.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class AdicionarServico extends JFrame{
 	
@@ -27,6 +28,7 @@ public class AdicionarServico extends JFrame{
 	private JTable tablePrincipal;
 
 	public AdicionarServico(final List<Servico> servicosSelecionados){
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 			
 		//Configurações gerais
 		setTitle("Adicionar Servi\u00E7o");

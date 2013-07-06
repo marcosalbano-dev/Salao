@@ -21,6 +21,7 @@ import source.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Toolkit;
 
 public class Consulta extends JFrame{
 	
@@ -28,6 +29,7 @@ public class Consulta extends JFrame{
 	private JTable tablePrincipal;
 	
 	public Consulta(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		//Config geral do Frame
 		setTitle("Consulta de Clientes-Servi\u00E7os");

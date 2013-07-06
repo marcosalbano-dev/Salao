@@ -20,6 +20,7 @@ import javax.swing.JFormattedTextField;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class CadastroCliente extends JFrame {
 	
@@ -33,6 +34,7 @@ public class CadastroCliente extends JFrame {
 	private JRadioButton rdbtnFeminino;
 
 	public CadastroCliente(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		//Define tamanho e posição da tela
 		setBounds(100, 100, 480, 240);
 		setLocationRelativeTo(null);

@@ -25,6 +25,7 @@ public class Login extends JFrame {
 	private JButton btnSair;
 	
 	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		setTitle("Ana Mesquita Cabeleireiros (ver 1.0)");
 		getContentPane().setLayout(null);
@@ -39,6 +40,12 @@ public class Login extends JFrame {
 		lblTitle.setFont(new Font("Segoe Script", Font.BOLD, 26));
 		lblTitle.setBounds(10, 11, 414, 40);
 		getContentPane().add(lblTitle);
+		
+		JLabel lblVersão = new JLabel("Vers\u00E3o 1.0 ");
+		lblVersão.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblVersão.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblVersão.setBounds(323, 50, 101, 14);
+		getContentPane().add(lblVersão);
 		
 		//Panel principal
 		JPanel panelGerenciamento = new JPanel();
@@ -131,5 +138,7 @@ public class Login extends JFrame {
 		});
 		btnSair_1.setBounds(10, 11, 144, 23);
 		panel.add(btnSair_1);
+		
+		
 	}
 }
