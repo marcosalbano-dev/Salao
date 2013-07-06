@@ -43,17 +43,29 @@ public class Login extends JFrame {
 		//Panel principal
 		JPanel panelGerenciamento = new JPanel();
 		panelGerenciamento.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Gerenciamento", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelGerenciamento.setBounds(10, 62, 164, 124);
+		panelGerenciamento.setBounds(10, 50, 164, 124);
 		getContentPane().add(panelGerenciamento);
 		panelGerenciamento.setLayout(null);
 		
 		//Botão Atendimento
 		JButton btnAtendimento = new JButton("Atendimento");
+		btnAtendimento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Atendimento novaTelaAtendimento = new Atendimento();
+				novaTelaAtendimento.setVisible(true);
+			}
+		});
 		btnAtendimento.setBounds(10, 22, 144, 23);
 		panelGerenciamento.add(btnAtendimento);
 		
 		//Botao Agenda
 		JButton btnAgenda = new JButton("Agenda");
+		btnAgenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.Agenda novaTelaAgenda = new frame.Agenda();
+				novaTelaAgenda.setVisible(true);
+			}
+		});
 		btnAgenda.setBounds(10, 56, 144, 23);
 		panelGerenciamento.add(btnAgenda);
 		
@@ -71,7 +83,7 @@ public class Login extends JFrame {
 		//Painel Cadastro
 		JPanel panelCadastro = new JPanel();
 		panelCadastro.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Cadastro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelCadastro.setBounds(10, 187, 164, 95);
+		panelCadastro.setBounds(10, 175, 164, 95);
 		getContentPane().add(panelCadastro);
 		panelCadastro.setLayout(null);
 		
@@ -100,7 +112,7 @@ public class Login extends JFrame {
 		//Painel do botão Sair
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(268, 234, 164, 48);
+		panel.setBounds(260, 222, 164, 48);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		

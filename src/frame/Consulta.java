@@ -16,7 +16,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import java.net.ConnectException;
 import source.*;
 
 import java.sql.SQLException;
@@ -50,13 +49,14 @@ public class Consulta extends JFrame{
 		getContentPane().add(cboxOpcoes);
 		
 		cboxOpcoes.addItem("-");
-		cboxOpcoes.addItem("Serviço");
-		cboxOpcoes.addItem("Cliente");
+		cboxOpcoes.addItem("Serviços");
+		cboxOpcoes.addItem("Clientes");
+		cboxOpcoes.addItem("Atendimentos");
 		
 		//Panel Principal
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(189, 321, 167, 38);
+		panel.setBounds(189, 321, 178, 38);
 		getContentPane().add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -67,7 +67,7 @@ public class Consulta extends JFrame{
 				
 				ConnectionFactory pesquisaBD = new ConnectionFactory();
 				
-				if(cboxOpcoes.getSelectedItem().equals("Cliente")){
+				if(cboxOpcoes.getSelectedItem().equals("Clientes")){
 					
 					List<Cliente> clientesObtidos = new ArrayList<Cliente>();
 					
@@ -77,14 +77,12 @@ public class Consulta extends JFrame{
 						consultaCliente(clientesObtidos);
 						
 					} catch (SQLException exc) {
-						
 						JOptionPane.showMessageDialog(null, "Não foi possível realizar a pesquisa." +exc.getMessage());
 						
 					}
 					
-					
-					
-				}else if (cboxOpcoes.getSelectedItem().equals("Serviço")){
+				}
+				else if(cboxOpcoes.getSelectedItem().equals("Serviços")){
 					
 					List<Servico> servicosObtidos = new ArrayList<Servico>();
 					
@@ -92,24 +90,38 @@ public class Consulta extends JFrame{
 						servicosObtidos = pesquisaBD.servicosToList();
 						consultaServicos(servicosObtidos);
 					} catch (SQLException exc){
-						
 						JOptionPane.showMessageDialog(null, "Não foi possível realizar a pesquisa." +exc.getMessage());
+					}
+				} 
+				else if(cboxOpcoes.getSelectedItem().equals("Atendimentos")){
+					
+					List<Atende> atendimentosObtidos = new ArrayList<Atende>();
+					
+					try {
+						atendimentosObtidos = pesquisaBD.atendimentosToList();
+						consultaAtendimento(atendimentosObtidos);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "Não foi possível realizar a pesquisa." +e1.getMessage());
 					}
 					
 				}
+				else if(cboxOpcoes.getSelectedItem().equals("-")){
+					JOptionPane.showMessageDialog(null, "Selecione o que você dejesa vizualizar");
+				}
+				
 			}
 		});
 		panel.add(btnConsultar);
 		
 		//Botão Sair
-		JButton btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				dispose();
 			}
 		});
-		panel.add(btnSair);
+		panel.add(btnVoltar);
 		
 		JScrollPane scpPrincipal = new JScrollPane();
 		scpPrincipal.setBounds(20, 36, 494, 274);
@@ -123,15 +135,9 @@ public class Consulta extends JFrame{
 	//Popula a tabela com Clientes
 	public void consultaCliente(List<Cliente> clientes){
 		
-		String[] colunas = new String[5];
+		String[] colunas = {"Nome do Cliente","Endereço","Sexo","Telefone","Celular"};
 		String[][] dados = new String[clientes.size()][5];
-		
-		colunas[0] = "Nome do Cliente";
-		colunas[1] = "Endereço";
-		colunas[2] = "Sexo";
-		colunas[3] = "Telefone";
-		colunas[4] = "Celular";
-		
+
 		int contador = 0;
 		
 		for(Cliente c : clientes){
@@ -156,11 +162,8 @@ public class Consulta extends JFrame{
 	//Popula a tabela com Servicos
 	public void consultaServicos(List<Servico> servicos){
 		
-		String[] colunas = new String[2];
+		String[] colunas = {"Nome do Serviço", "Preço"};
 		String[][] dados = new String[servicos.size()][2];
-		
-		colunas[0] = "Nome do Servico";
-		colunas[1] = "Preço";
 		
 		int contador = 0;
 		
@@ -177,7 +180,30 @@ public class Consulta extends JFrame{
 		tablePrincipal.getColumnModel().getColumn(1).setPreferredWidth(300);
 		
 	}
-	
+
+	//Popular a tableca com Atendimentos
+	public void consultaAtendimento(List<Atende> atendimentos){
+		
+		String[] colunas = {"Nome do Cliente", "Nome do Serviço", "Preço"};
+		String[][] dados = new String[atendimentos.size()][3];
+		
+		int contador = 0;
+		
+		for(Atende a: atendimentos){
+			
+			dados[contador][0] = a.getS_nomeCliente();
+			dados[contador][1] = a.getS_nomeServico();
+			dados[contador][2] = "R$ " + a.getD_preco();
+			
+			contador ++;
+		}
+		
+		tablePrincipal.setModel(new DefaultTableModel(dados, colunas));
+		tablePrincipal.getColumnModel().getColumn(0).setPreferredWidth(500);
+		tablePrincipal.getColumnModel().getColumn(1).setPreferredWidth(500);
+		tablePrincipal.getColumnModel().getColumn(2).setPreferredWidth(200);
+		
+	}
 	
 	
 	

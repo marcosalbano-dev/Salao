@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 import source.ConnectionFactory;
 import source.Servico;
@@ -77,11 +78,21 @@ public class CadastroServico extends JFrame{
 
 						String novoNomeServico = txtNomeServico.getText();
 						Double novoPreco = Double.parseDouble(txtPreco.getText());
-					
+						
+						//Monta o Objeto serviço
 						novoServico = novoServico.cadastraServico(novoNomeServico, novoPreco);	
 						
+						//Insere o serviço no BD
 						ConnectionFactory adicionarServico = new ConnectionFactory();
-						adicionarServico.insereServico(novoServico);
+						try {
+							
+							adicionarServico.insereServico(novoServico);
+							
+						} catch (SQLException e1) {
+							
+							JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o serviço" +e1.getMessage());
+						
+						}
 					}
 				}
 			}
@@ -101,15 +112,15 @@ public class CadastroServico extends JFrame{
 		panelOpcoes.add(btnLimpar);
 		
 		//Botão Sair
-		JButton btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				dispose();
 			}
 		});
-		btnSair.setBounds(208, 11, 89, 23);
-		panelOpcoes.add(btnSair);
+		btnVoltar.setBounds(208, 11, 89, 23);
+		panelOpcoes.add(btnVoltar);
 		
 	}
 	
