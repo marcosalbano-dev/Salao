@@ -15,6 +15,14 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+import java.awt.FlowLayout;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+
+
+
 
 public class Inicio extends JFrame{
 
@@ -114,17 +122,6 @@ public class Inicio extends JFrame{
 		//Menu Administrativo
 		JMenu mnAdministrativo = new JMenu("Administrativo");
 		menuBarPrincipal.add(mnAdministrativo);
-		
-		
-		
-		
-		/////////////////////////////////////////
-		
-		JLabel lblAnaMesquitaCabeleireiros = new JLabel("Ana Mesquita Cabeleireiros");
-		lblAnaMesquitaCabeleireiros.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAnaMesquitaCabeleireiros.setFont(new Font("Gabriola", Font.BOLD | Font.ITALIC, 36));
-		lblAnaMesquitaCabeleireiros.setBounds(0, 127, 534, 91);
-		getContentPane().add(lblAnaMesquitaCabeleireiros);
 
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
@@ -144,5 +141,23 @@ public class Inicio extends JFrame{
 		lblVerso.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblVerso.setBounds(10, 336, 197, 14);
 		getContentPane().add(lblVerso);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(UIManager.getColor("Button.light"));
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBounds(10, 32, 514, 270);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		
+		
+		
+		/////////////////////////////////////////
+		
+		JLabel lblAnaMesquitaCabeleireiros = new JLabel("Ana Mesquita Cabeleireiros");
+		lblAnaMesquitaCabeleireiros.setBounds(10, 108, 494, 62);
+		panel.add(lblAnaMesquitaCabeleireiros);
+		lblAnaMesquitaCabeleireiros.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAnaMesquitaCabeleireiros.setFont(new Font("Gabriola", Font.BOLD | Font.ITALIC, 36));
 	}
 }

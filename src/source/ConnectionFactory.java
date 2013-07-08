@@ -118,10 +118,11 @@ public class ConnectionFactory{
 		this.getConnection();
 		
 		try{
-			PreparedStatement adicionarAtendimento = this.conexao.prepareStatement("INSERT INTO tab_atendimento VALUES(?,?,?)");
+			PreparedStatement adicionarAtendimento = this.conexao.prepareStatement("INSERT INTO tab_atendimento VALUES(?,?,?,?)");
 			adicionarAtendimento.setString(1, novoAtendimento.getS_nomeCliente());
 			adicionarAtendimento.setString(2, novoAtendimento.getS_nomeServico());
 			adicionarAtendimento.setDouble(3, novoAtendimento.getD_preco());
+			adicionarAtendimento.setString(4, novoAtendimento.getS_data());
 		
 			
 			adicionarAtendimento.executeUpdate();
@@ -236,6 +237,7 @@ public class ConnectionFactory{
 			atendimentoObtido.setS_nomeCliente(resultadoPesquisa.getString("nome_cliente"));
 			atendimentoObtido.setS_nomeServico(resultadoPesquisa.getString("nome_servico"));
 			atendimentoObtido.setD_preco(resultadoPesquisa.getDouble("preco"));
+			atendimentoObtido.setS_data(resultadoPesquisa.getString("data"));
 			
 			Atendimentos.add(atendimentoObtido);
 		}

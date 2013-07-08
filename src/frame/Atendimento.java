@@ -11,10 +11,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JFormattedTextField;
 
 import source.*;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class Atendimento extends JFrame {
 	private JTable tablePrincipal;
 	private JTextField txtValorFinal;
 	private JComboBox<String> cboxClientes;
+	private JFormattedTextField txtData;
 	
 	public Atendimento(){
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
@@ -44,25 +47,30 @@ public class Atendimento extends JFrame {
 		setTitle("Atendimento");
 		getContentPane().setLayout(null);
 		
-		setBounds(100, 100, 550, 400);
+		setBounds(100, 100, 550, 410);
 		setLocationRelativeTo(null);
 		
 		//Labels
 		JLabel lblSelecioneOCliente = new JLabel("Selecione o Cliente:");
 		lblSelecioneOCliente.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblSelecioneOCliente.setBounds(10, 11, 110, 14);
+		lblSelecioneOCliente.setBounds(10, 11, 106, 14);
 		getContentPane().add(lblSelecioneOCliente);
 		
 		JLabel lblServicos = new JLabel("Servi\u00E7os:");
 		lblServicos.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblServicos.setBounds(10, 40, 110, 14);
+		lblServicos.setBounds(10, 40, 106, 14);
 		getContentPane().add(lblServicos);
 		
 		JLabel lblTotal = new JLabel("Total:");
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTotal.setBounds(338, 292, 66, 14);
+		lblTotal.setBounds(338, 328, 66, 14);
 		getContentPane().add(lblTotal);
+		
+		JLabel lblData = new JLabel("Data:");
+		lblData.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblData.setBounds(10, 73, 106, 14);
+		getContentPane().add(lblData);
 		
 		//Combobox Clientes
 		final JComboBox<String> cboxClientes = new JComboBox<String>();
@@ -84,7 +92,7 @@ public class Atendimento extends JFrame {
 		
 		//Scroll panel principal
 		JScrollPane scpPrincipal = new JScrollPane();
-		scpPrincipal.setBounds(10, 65, 514, 195);
+		scpPrincipal.setBounds(10, 101, 514, 195);
 		getContentPane().add(scpPrincipal);
 		
 		//Tabela principal
@@ -97,13 +105,25 @@ public class Atendimento extends JFrame {
 		txtValorFinal.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtValorFinal.setHorizontalAlignment(SwingConstants.CENTER);
 		txtValorFinal.setEditable(false);
-		txtValorFinal.setBounds(414, 274, 110, 50);
+		txtValorFinal.setBounds(414, 310, 110, 50);
 		getContentPane().add(txtValorFinal);
 		txtValorFinal.setColumns(10);
 		
+		//Field data
+		txtData = new JFormattedTextField();
+		txtData.setBounds(126, 70, 86, 20);
+		getContentPane().add(txtData);
+		txtData.setColumns(10);
+		
+		try {
+			txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(null, "Erro:"+e.getMessage());
+		}
+		
 		//PanelOpções
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 271, 302, 41);
+		panel.setBounds(10, 307, 302, 41);
 		getContentPane().add(panel);
 		
 		//Botão Adicionar Serviço
@@ -139,8 +159,9 @@ public class Atendimento extends JFrame {
 							String nomeCliente = (String) cboxClientes.getSelectedItem();
 							String nomeServico = s.getS_nomeServico();
 							double preco = s.getD_preco();
+							String data = (String) txtData.getText();
 							
-							novoAtendimento = novoAtendimento.registrarAtendimento(nomeCliente, nomeServico, preco);
+							novoAtendimento = novoAtendimento.registrarAtendimento(nomeCliente, nomeServico, preco, data);
 							
 							try {
 								conexaoBD.insereAtendimento(novoAtendimento);
@@ -202,6 +223,8 @@ public class Atendimento extends JFrame {
 		btnAtualizar.setBounds(284, 36, 89, 23);
 		getContentPane().add(btnAtualizar);
 		
+		
+		
 	}
 	
 	public double popularTabela(List<Servico> servicosSelecionados){
@@ -230,6 +253,10 @@ public class Atendimento extends JFrame {
 	
 	public boolean checkField(String testeCliente){
 		
+		String testeData = txtData.getText();
+		testeData = testeData.replace("/", "");
+		testeData = testeData.replaceAll(" ", "");
+		
 		if(testeCliente.equals("-")){
 			JOptionPane.showMessageDialog(null, "Selecione o cliente");
 			return false;
@@ -238,10 +265,12 @@ public class Atendimento extends JFrame {
 			JOptionPane.showMessageDialog(null, "Selecione o(s) serviço(s) realizados");
 			return false;
 		}
+		else if(testeData.equals("")){
+			JOptionPane.showMessageDialog(null, "Digite a data do atendimento");
+			return false;
+		}
 		
 		return true;
 		
 	}
-	
-	
 }

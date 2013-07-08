@@ -186,8 +186,8 @@ public class Consulta extends JFrame{
 	//Popular a tableca com Atendimentos
 	public void consultaAtendimento(List<Atende> atendimentos){
 		
-		String[] colunas = {"Nome do Cliente", "Nome do Serviço", "Preço"};
-		String[][] dados = new String[atendimentos.size()][3];
+		String[] colunas = {"Nome do Cliente", "Nome do Serviço", "Preço", "Data"};
+		String[][] dados = new String[atendimentos.size()][4];
 		
 		int contador = 0;
 		
@@ -196,6 +196,7 @@ public class Consulta extends JFrame{
 			dados[contador][0] = a.getS_nomeCliente();
 			dados[contador][1] = a.getS_nomeServico();
 			dados[contador][2] = "R$ " + a.getD_preco();
+			dados[contador][3] = a.getS_data();
 			
 			contador ++;
 		}
@@ -204,7 +205,7 @@ public class Consulta extends JFrame{
 		tablePrincipal.getColumnModel().getColumn(0).setPreferredWidth(500);
 		tablePrincipal.getColumnModel().getColumn(1).setPreferredWidth(500);
 		tablePrincipal.getColumnModel().getColumn(2).setPreferredWidth(200);
-		
+		tablePrincipal.getColumnModel().getColumn(3).setPreferredWidth(200);
 	}
 	
 	
