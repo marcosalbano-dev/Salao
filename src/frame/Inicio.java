@@ -27,6 +27,7 @@ import javax.swing.UIManager;
 public class Inicio extends JFrame{
 
 	public Inicio(){
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		//Configurações gerais do Frame
@@ -122,6 +123,65 @@ public class Inicio extends JFrame{
 		//Menu Administrativo
 		JMenu mnAdministrativo = new JMenu("Administrativo");
 		menuBarPrincipal.add(mnAdministrativo);
+		
+		//Submenu apagar registros
+		JMenu mnApagarRegistros = new JMenu("Apagar Registros");
+		mnAdministrativo.add(mnApagarRegistros);
+		
+		//Apagar Cliente
+		JMenuItem mitemApagarCliente = new JMenuItem("Apagar Cliente");
+		mnApagarRegistros.add(mitemApagarCliente);
+		mitemApagarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ApagarCliente novaTelaApagarCliente = new ApagarCliente();
+				novaTelaApagarCliente.setVisible(true);
+			}
+		});
+		
+		//Apagar serviço
+		JMenuItem mitemApagarServio = new JMenuItem("Apagar Servi\u00E7o");
+		mnApagarRegistros.add(mitemApagarServio);
+		mitemApagarServio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ApagarServico novaTelaApagarServico = new ApagarServico();
+				novaTelaApagarServico.setVisible(true);
+			}
+		});
+		
+		//Apagar agendamento
+		JMenuItem mitemApagarAgendamento = new JMenuItem("Apagar Agendamento");
+		mnApagarRegistros.add(mitemApagarAgendamento);
+		mitemApagarAgendamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ApagarAgendamento novaTelaApagarAgendamento = new ApagarAgendamento();
+				novaTelaApagarAgendamento.setVisible(true);
+			}
+		});
+		
+		//Apagar Atendimento
+		JMenuItem mitemApagarAtendimento = new JMenuItem("Apagar Atendimento");
+		mnApagarRegistros.add(mitemApagarAtendimento);
+		mitemApagarAtendimento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ApagarAtendimento novaTelaApagarAtendimento = new ApagarAtendimento();
+				novaTelaApagarAtendimento.setVisible(true);
+			}
+		});
+		
+		JMenu mnModificarRegistro = new JMenu("Modificar Registro");
+		mnAdministrativo.add(mnModificarRegistro);
+		
+		JMenuItem mntmModificarCliente = new JMenuItem("Modificar Cliente");
+		mnModificarRegistro.add(mntmModificarCliente);
+		
+		JMenuItem mntmModificarServio = new JMenuItem("Modificar Servi\u00E7o");
+		mnModificarRegistro.add(mntmModificarServio);
+		
+		JMenuItem mntmModificarAgendamento = new JMenuItem("Modificar Agendamento");
+		mnModificarRegistro.add(mntmModificarAgendamento);
+		
+		JMenuItem mntmModificarAtendimento = new JMenuItem("Modificar Atendimento");
+		mnModificarRegistro.add(mntmModificarAtendimento);
 
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {

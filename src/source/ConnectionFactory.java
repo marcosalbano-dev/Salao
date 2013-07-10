@@ -248,5 +248,102 @@ public class ConnectionFactory{
 		
 		return Atendimentos;
 	}
+	
+	//Apaga um cliente do BD
+	public boolean apagarCliente(String nomeCliente) {
+		
+		try{
+			this.getConnection();
+			
+			PreparedStatement pesquisaCliente = this.conexao.prepareStatement("DELETE FROM tab_clientes WHERE nome_cliente = ?");
+			
+			pesquisaCliente.setString(1, nomeCliente);
+			pesquisaCliente.execute();
+			
+			pesquisaCliente.close();
+			this.closeConnection();
+		}
+		catch(SQLException e){
+			JOptionPane.showMessageDialog(null, "Não foi possível apagar o cliente. "+e.getMessage());
+			return false;
+		}
+	
+		return true;
+	}
+	
+	//Apaga um serviço do BD
+	public boolean apagarServico(String nomeServico) {
+			
+		try{
+			this.getConnection();
+			
+			PreparedStatement pesquisaServico = this.conexao.prepareStatement("DELETE FROM tab_servicos WHERE nome_servico = ?");
+			
+			pesquisaServico.setString(1, nomeServico);
+			pesquisaServico.execute();
+				
+			pesquisaServico.close();
+			this.closeConnection();
+		}
+		catch(SQLException e){
+			JOptionPane.showMessageDialog(null, "Não foi possível apagar o servico."+e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
+		
+	//Apaga um agendamento do BD 
+	public boolean apagarAgendamento(String nomeCliente, String nomeServico, String dia, String hora) {
+		
+		try{
+			this.getConnection();
+			
+			PreparedStatement pesquisaAgendamento = this.conexao.prepareStatement("DELETE FROM tab_agenda WHERE nome_cliente = ? and nome_servico = ? and dia = ? and hora = ?");
+			
+			pesquisaAgendamento.setString(1, nomeCliente);
+			pesquisaAgendamento.setString(2, nomeServico);
+			pesquisaAgendamento.setString(3, dia);
+			pesquisaAgendamento.setString(4, hora);
+			
+			pesquisaAgendamento.execute();
+				
+			pesquisaAgendamento.close();
+			this.closeConnection();
+		}
+		catch(SQLException e){
+			JOptionPane.showMessageDialog(null, "Não foi possível apagar o Agendamento. "+e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
+		
+	//Apaga um atendimento do BD
+	public boolean apagarAtendimento(String nomeCliente, String nomeServico, String preco, String data) {
+		
+		try{
+			this.getConnection();
+			
+			PreparedStatement pesquisaAtendimento = this.conexao.prepareStatement("DELETE FROM tab_atendimento WHERE nome_cliente = ? and nome_servico = ? and preco = ? and data = ?");
+			
+			pesquisaAtendimento.setString(1, nomeCliente);
+			pesquisaAtendimento.setString(2, nomeServico);
+			pesquisaAtendimento.setString(3, preco);
+			pesquisaAtendimento.setString(4, data);
+			
+			pesquisaAtendimento.execute();
+				
+			pesquisaAtendimento.close();
+			this.closeConnection();
+		}
+		catch(SQLException e){
+			JOptionPane.showMessageDialog(null, "Não foi possível apagar o Atendimento. "+e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
+		
 }
 
