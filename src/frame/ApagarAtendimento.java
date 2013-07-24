@@ -17,6 +17,7 @@ import java.util.List;
 import source.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class ApagarAtendimento extends JFrame {
 	
@@ -24,6 +25,7 @@ public class ApagarAtendimento extends JFrame {
 	private JTable tablePrincipal;
 	
 	public ApagarAtendimento(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		
 		//Declarações

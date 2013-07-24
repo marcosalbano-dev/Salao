@@ -25,6 +25,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import javax.swing.JRadioButton;
+import javax.swing.border.TitledBorder;
+import javax.swing.ButtonGroup;
 
 public class Atendimento extends JFrame {
 	
@@ -33,6 +36,8 @@ public class Atendimento extends JFrame {
 	private JTextField txtValorFinal;
 	private JComboBox<String> cboxClientes;
 	private JFormattedTextField txtData;
+	private JTextField txtAddDesc;
+
 	
 	public Atendimento(){
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
@@ -47,7 +52,7 @@ public class Atendimento extends JFrame {
 		setTitle("Atendimento");
 		getContentPane().setLayout(null);
 		
-		setBounds(100, 100, 550, 410);
+		setBounds(100, 100, 550, 424);
 		setLocationRelativeTo(null);
 		
 		//Labels
@@ -64,7 +69,7 @@ public class Atendimento extends JFrame {
 		JLabel lblTotal = new JLabel("Total:");
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTotal.setBounds(338, 328, 66, 14);
+		lblTotal.setBounds(338, 335, 66, 14);
 		getContentPane().add(lblTotal);
 		
 		JLabel lblData = new JLabel("Data:");
@@ -105,7 +110,7 @@ public class Atendimento extends JFrame {
 		txtValorFinal.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtValorFinal.setHorizontalAlignment(SwingConstants.CENTER);
 		txtValorFinal.setEditable(false);
-		txtValorFinal.setBounds(414, 310, 110, 50);
+		txtValorFinal.setBounds(414, 317, 110, 50);
 		getContentPane().add(txtValorFinal);
 		txtValorFinal.setColumns(10);
 		
@@ -123,7 +128,8 @@ public class Atendimento extends JFrame {
 		
 		//PanelOpções
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 307, 302, 41);
+		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 329, 281, 38);
 		getContentPane().add(panel);
 		
 		//Botão Adicionar Serviço
@@ -196,6 +202,8 @@ public class Atendimento extends JFrame {
 				
 				tablePrincipal.removeAll();
 				
+				txtData.setText("");
+				
 			}
 		});
 		panel.add(btnLimpar);
@@ -222,9 +230,6 @@ public class Atendimento extends JFrame {
 		});
 		btnAtualizar.setBounds(284, 36, 89, 23);
 		getContentPane().add(btnAtualizar);
-		
-		
-		
 	}
 	
 	public double popularTabela(List<Servico> servicosSelecionados){

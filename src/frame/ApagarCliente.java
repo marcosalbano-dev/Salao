@@ -16,6 +16,7 @@ import java.util.List;
 import source.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 		
 public class ApagarCliente extends JFrame {
 	
@@ -23,6 +24,7 @@ public class ApagarCliente extends JFrame {
 	private JTable tablePrincipal;
 
 	public ApagarCliente(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		//Declarações 
 		final ConnectionFactory conexaoBD = new ConnectionFactory();

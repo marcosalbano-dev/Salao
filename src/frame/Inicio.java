@@ -21,17 +21,15 @@ import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 
-
-
-
 public class Inicio extends JFrame{
 
 	public Inicio(){
+	
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcus\\Documents\\GitHub\\Extras\\iconeCabelereiro.gif"));
 		
 		//Configurações gerais do Frame
-		setTitle("Ana Mesquita Cabeleireiros (ver.1.0)");
+		setTitle("Ana Mesquita Cabeleireiros (ver.1.1)");
 		getContentPane().setLayout(null);
 		
 		setBounds(100, 100, 550, 400);
@@ -197,7 +195,7 @@ public class Inicio extends JFrame{
 		btnSair.setBounds(413, 309, 111, 41);
 		getContentPane().add(btnSair);
 		
-		JLabel lblVerso = new JLabel("Vers\u00E3o 1.0 , por Marcus Mesquita");
+		JLabel lblVerso = new JLabel("Vers\u00E3o 1.1 , por Marcus Mesquita");
 		lblVerso.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblVerso.setBounds(10, 336, 197, 14);
 		getContentPane().add(lblVerso);
